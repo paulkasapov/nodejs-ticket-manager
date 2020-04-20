@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const ticket = require("./routes/ticket.route");
 const user = require('./routes/user.route');
+require('dotenv').config();
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.use(bodyParser.json());
 app.use('/api/tickets', ticket);
 app.use('/api/users', user);
 
-let port = 3030;
+let port = process.env.PORT || 3030;
 
 app.listen(port, () => {
     console.log('Server is up and running on port numner ' + port);

@@ -39,9 +39,7 @@ exports.user_login = async (req, res) => {
     const validPass = await bcrypt.compare(req.body.password, user.password);
     if (!validPass) return res.status(400).send('Login or password is wrong');
 
-    const TOKEN_SECRET = "asdfasdf"; //temporary crutch
-
-    const token = jwt.sign({_id: user._id}, TOKEN_SECRET);
+    const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
     res.header('auth-token', token).send(token)
 
 };
