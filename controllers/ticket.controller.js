@@ -3,7 +3,6 @@ const Ticket = require('../models/ticket.model');
 exports.ticket_read = function (req, res) {
     Ticket.find({}, function (err, ticket) {
         if (err) res.sendStatus(500).send(err);
-        console.log(ticket);
         res.send(ticket);
     })
 };
@@ -39,4 +38,11 @@ exports.ticket_create = async (req, res) => {
     } catch (e) {
         return res.sendStatus(400).send(e)
     }
+};
+
+exports.ticket_delete = function (req, res) {
+    Ticket.findByIdAndRemove(req.params.id, function (err) {
+        if (err) return res.sendStatus(500).send({...err});
+        res.send('Deleted successfully!');
+    })
 };

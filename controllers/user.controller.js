@@ -24,12 +24,12 @@ exports.user_create = async (req, res) => {
         const savedUser = await user.save();
         res.send(savedUser)
     } catch (e) {
-        console.log(e);
         return res.sendStatus(400).send(e)
     }
 };
 
 exports.user_login = async (req, res) => {
+
     const {error} = loginValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
@@ -39,7 +39,12 @@ exports.user_login = async (req, res) => {
     const validPass = await bcrypt.compare(req.body.password, user.password);
     if (!validPass) return res.status(400).send('Login or password is wrong');
 
-    const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
+    console.log(user)
+    const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET, { expiresIn: '1h' });
     res.header('auth-token', token).send(token)
 
+};
+
+exports.user_logout = async (req, res) => {
+    res.header('auth-token', '').send(res.header)
 };
