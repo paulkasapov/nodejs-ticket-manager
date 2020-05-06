@@ -30,7 +30,12 @@ let UserSchema = new Schema({
         type: String,
         default: '../src/assets/default-avatar.png'
     },
-    specialities: [String]
+    specialities: {
+        type: Array,
+        items: {
+            type: String
+        }
+    }
 });
 
 module.exports = mongoose.model('User', UserSchema);

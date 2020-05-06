@@ -15,7 +15,7 @@ const registerValidation = (data) => {
             .min(3)
             .required(),
         avatar: Joi.string(),
-        specialities: [Joi.string()]
+        specialities: [Joi.array().items(Joi.string())]
     });
     return schema.validate(data);
 };

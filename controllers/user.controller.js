@@ -39,12 +39,11 @@ exports.user_login = async (req, res) => {
     const validPass = await bcrypt.compare(req.body.password, user.password);
     if (!validPass) return res.status(400).send('Login or password is wrong');
 
-    console.log(user)
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET, { expiresIn: '1h' });
     res.header('auth-token', token).send(token)
 
 };
 
-exports.user_logout = async (req, res) => {
-    res.header('auth-token', '').send(res.header)
+exports.user_token_login = async (req, res) => {
+    res.sendStatus(200)
 };

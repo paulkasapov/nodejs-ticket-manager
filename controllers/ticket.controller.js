@@ -41,8 +41,8 @@ exports.ticket_create = async (req, res) => {
 };
 
 exports.ticket_delete = function (req, res) {
-    Ticket.findByIdAndRemove(req.params.id, function (err) {
-        if (err) return res.sendStatus(500).send({...err});
+    Ticket.deleteOne({ticketId : req.params.id}, function (err) {
+        if (err) return res.sendStatus(404).send({...err});
         res.send('Deleted successfully!');
     })
 };
