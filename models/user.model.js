@@ -5,26 +5,26 @@ let UserSchema = new Schema({
     userName: {
         type: String,
         required: true,
-        max: 255,
+        max: 20,
         min: 6
     },
     password: {
         type: String,
         required: true,
-        max: 255,
+        max: 20,
         min: 6
     },
     firstName: {
         type: String,
         required: true,
-        max: 255,
-        min: 6
+        max: 20,
+        min: 3
     },
     lastName: {
         type: String,
         required: true,
-        max: 255,
-        min: 6
+        max: 20,
+        min: 3
     },
     avatar: {
         type: String,

@@ -2,12 +2,16 @@ const Ticket = require('../models/ticket.model');
 
 exports.ticket_read = function (req, res) {
     Ticket.find({}, function (err, ticket) {
-        if (err) res.sendStatus(500).send(err);
+        if (err) res.sendStatus(404).send(err);
         res.send(ticket);
     })
 };
 
 exports.ticket_create = async (req, res) => {
+
+    const {error} = ticketValidation(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
     let ticket = new Ticket(
         {
             ticketId: req.body.ticketId,
@@ -35,8 +39,8 @@ exports.ticket_create = async (req, res) => {
     try {
         const savedTicket = await ticket.save();
         res.send(savedTicket)
-    } catch (e) {
-        return res.sendStatus(400).send(e)
+    } catch (err) {
+        return res.sendStatus(400).send(err)
     }
 };
 

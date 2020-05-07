@@ -6,6 +6,9 @@ const saltRounds = 10;
 
 exports.user_create = async (req, res) => {
 
+    const existedUser = await User.findOne({userName: req.body.userName});
+    if (existedUser) return res.status(400).send('Such login already exists');
+
     const {error} = registerValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
