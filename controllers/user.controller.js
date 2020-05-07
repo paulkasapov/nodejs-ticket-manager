@@ -71,6 +71,7 @@ exports.user_token_login = async (req, res) => {
 
 exports.user_check_unique_login = async (req, res) => {
     const user = await User.findOne({userName: req.body.userName});
+    console.log(user)
     if (user) return res.status(400).send('Such login is already exists');
     res.status(200).send("Login is unique")
 };
