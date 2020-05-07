@@ -6,7 +6,7 @@ let TicketSchema = new Schema({
     number: {type: String, required: true},
     lastUpdatedTime: {type: String, required: true},
     owner: {
-        userId: {type: Number, required: true},
+        userId: {type: String, required: true},
         firstName: {type: String, required: true},
         lastName: {type: String, required: true},
         avatar: {type: String, required: true, default: '../src/assets/default-avatar.png'},

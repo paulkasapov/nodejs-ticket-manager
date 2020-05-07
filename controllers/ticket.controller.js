@@ -1,4 +1,5 @@
 const Ticket = require('../models/ticket.model');
+const {ticketValidation} = require('../validation');
 
 exports.ticket_read = function (req, res) {
     Ticket.find({}, function (err, ticket) {

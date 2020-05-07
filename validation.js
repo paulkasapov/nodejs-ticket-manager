@@ -36,7 +36,7 @@ const ticketValidation = (data) => {
     const schema = Joi.object({
         ticketId: Joi.number()
             .required(),
-        numder: Joi.string()
+        number: Joi.string()
             .required(),
         lastUpdatedTime: Joi.string()
             .required(),
@@ -77,4 +77,4 @@ const ticketValidation = (data) => {
     return schema.validate(data);
 };
 
-module.exports = {registerValidation, loginValidation};
+module.exports = {registerValidation, loginValidation, ticketValidation};
