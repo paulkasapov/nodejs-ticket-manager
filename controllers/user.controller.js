@@ -24,9 +24,20 @@ exports.user_create = async (req, res) => {
         specialities: req.body.specialities
     });
     try {
-        const savedUser = await user.save();
-        const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET, { expiresIn: '1h' });
-        res.header('auth-token', token).send({token, savedUser})
+        await user.save();
+
+        const createdUser = await User.findOne({userName: req.body.userName});
+        const token = jwt.sign({_id: createdUser._id}, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+        const userData = {
+            userId: createdUser._id,
+            userName: createdUser.userName,
+            firstName: createdUser.firstName,
+            lastName: createdUser.lastName,
+            avatar: createdUser.avatar,
+            specialities: createdUser.specialities
+        }
+        console.log(user)
+        res.header('auth-token', token).send({token, userData})
     } catch (e) {
         return res.sendStatus(400).send(e)
         console.log(e)
